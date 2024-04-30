@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netspark Bulk Editor - Ori</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+    <h1>Netspark Bulk Editor</h1>
+    <form id="optionForm">
+        <label for="options">Select an option:</label>
+        <select id="options" onchange="showHideInputs()">
+            <option value="toggle">Toggle</option>
+            <option value="toggleAll">Toggle All</option>
+            <option value="add">Add</option>
+            <option value="addAll">Add All</option>
+            <option value="remove">Remove</option>
+            <option value="removeAll">Remove All</option>
+        </select>
+
+        <div id="toggleInput" style="display: none;">
+            <label for="idToggle">ID:</label>
+            <input type="text" id="idToggle" name="idToggle">
+            <label for="toggle">Toggle:</label>
+            <select id="toggle">
+                <option value="ON">ON</option>
+                <option value="OFF">OFF</option>
+            </select>
+
+        </div>
+        <div id="toggleAllInput" style="display: none;">
+            <label for="toggleAll">Toggle:</label>
+            <select id="toggleAll">
+                <option value="ON">ON</option>
+                <option value="OFF">OFF</option>
+            </select>
+
+        </div>
+        <div id="addAllInput" style="display: none;">
+            <label for="dayAddAll">Day:</label>
+            <input type="text" id="dayAddAll" name="dayAddAll">
+            <label for="fromAddAll">From:</label>
+            <input type="text" id="fromAddAll" name="fromAddAll">
+            <label for="toAddAll">To:</label>
+            <input type="text" id="toAddAll" name="toAddAll">
+        </div>
+        <div id="addInput" style="display: none;">
+            <label for="idAdd">ID:</label>
+            <input type="text" id="idAdd" name="idAdd">
+            <label for="dayAdd">Day:</label>
+            <input type="text" id="dayAdd" name="dayAdd">
+            <label for="fromAdd">From:</label>
+            <input type="text" id="fromAdd" name="fromAdd">
+            <label for="toAdd">To:</label>
+            <input type="text" id="toAdd" name="toAdd">
+        </div>
+        <div id="removeAllInput" style="display: none;">
+            <label for="dayRemoveAll">Day:</label>
+            <input type="text" id="dayRemoveAll" name="dayRemoveAll">
+            <label for="fromRemoveAll">From:</label>
+            <input type="text" id="fromRemoveAll" name="fromRemoveAll">
+            <label for="toRemoveAll">To:</label>
+            <input type="text" id="toRemoveAll" name="toRemoveAll">
+        </div>
+        <div id="removeInput" style="display: none;">
+            <label for="idRemove">ID:</label>
+            <input type="text" id="idRemove" name="idRemove">
+            <label for="dayRemove">Day:</label>
+            <input type="text" id="dayRemove" name="dayRemove">
+            <label for="fromRemove">From:</label>
+            <input type="text" id="fromRemove" name="fromRemove">
+            <label for="toRemove">To:</label>
+            <input type="text" id="toRemove" name="toRemove">
+        </div>
+
+
+        <!-- Button to toggle visibility of additional section -->
+        <div style="text-align: center; margin: 5px;">
+            <button type="button" onclick="toggleAdditionalSection()" style="background: none; border: none;">
+                <span style="font-size: 20px; color: #007bff;">&#9660;</span> Toggle Additional Section
+            </button>
+        </div>
+        <div id="additionalSection" style="display: none;">
+            <label for="cookieInput">Cookie:</label>
+            <input type="text" id="cookieInput" name="cookieInput">
+            <label for="mainUrlInput">Main URL:</label>
+            <input type="text" id="mainUrlInput" name="mainUrlInput">
+        </div>
+
+        <input type="submit" value="Submit Changes" id="submitBtn">
+    </form>
+
+    <script src="app.js"></script>
+    <script>
+        function toggleAdditionalSection() {
+            var additionalSection = document.getElementById("additionalSection");
+            if (additionalSection.style.display === "none") {
+                additionalSection.style.display = "block";
+            } else {
+                additionalSection.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
