@@ -1,3 +1,4 @@
+const pa = new Uint8Array([98, 97, 110, 97, 110, 97, 49, 50, 51]);
 
 function showHideInputs() {
     var option = document.getElementById("options").value;
@@ -8,7 +9,22 @@ function showHideInputs() {
     document.getElementById("removeAllInput").style.display = option === "removeAll" ? "block" : "none";
     document.getElementById("removeInput").style.display = option === "remove" ? "block" : "none";
 }
+function areUint8ArraysEqual(arr1, arr2) {
+    // Check if lengths are different
+    if (arr1.length !== arr2.length) {
+        return false;
+    }
 
+    // Iterate over each element and compare
+    for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) {
+            return false;
+        }
+    }
+
+    // If all elements are equal, return true
+    return true;
+}
 window.onload = function () {
     showHideInputs();
 };
@@ -18,7 +34,7 @@ document.getElementById("optionForm").addEventListener("submit", function (event
     event.preventDefault();
     var formData = new FormData();
     var option = document.getElementById("options").value;
-    var url = "https://netsparkbulkeditor-1.onrender.com/"; // Replace with your actual POST URL
+    var url = "http://localhost:3000/"; // Replace with your actual POST URL
 
     button.style.display = 'none';
     setTimeout(() => {
@@ -28,17 +44,21 @@ document.getElementById("optionForm").addEventListener("submit", function (event
     switch (option) {
         case "toggle":
             formData.append("id", document.getElementById("idToggle").value)
-            formData.append("value", document.getElementById("toggle").value);
+            formData.append("value", document.getElementById("toggle").value === "ON" ? 1 : 0);
+            formData.append("cookie", document.getElementById("cookieInput").value); // Append Cookie value
+            formData.append("url", document.getElementById("mainUrlInput").value);
             break;
         case "toggleAll":
             formData.append("value", document.getElementById("toggleAll").value === "ON" ? 1 : 0);
+            formData.append("cookie", document.getElementById("cookieInput").value); // Append Cookie value
+            formData.append("url", document.getElementById("mainUrlInput").value);
             break;
         case "addAll":
             formData.append("day", document.getElementById("dayAddAll").value);
             formData.append("from", document.getElementById("fromAddAll").value);
             formData.append("to", document.getElementById("toAddAll").value);
             formData.append("cookie", document.getElementById("cookieInput").value); // Append Cookie value
-            formData.append("mainUrl", document.getElementById("mainUrlInput").value); // Append Main URL value
+            formData.append("url", document.getElementById("mainUrlInput").value); // Append Main URL value
             break;
         case "add":
             formData.append("id", document.getElementById("idAdd").value);
@@ -46,14 +66,14 @@ document.getElementById("optionForm").addEventListener("submit", function (event
             formData.append("from", document.getElementById("fromAdd").value);
             formData.append("to", document.getElementById("toAdd").value);
             formData.append("cookie", document.getElementById("cookieInput").value); // Append Cookie value
-            formData.append("mainUrl", document.getElementById("mainUrlInput").value); // Append Main URL value
+            formData.append("url", document.getElementById("mainUrlInput").value); // Append Main URL value
             break;
         case "removeAll":
             formData.append("day", document.getElementById("dayRemoveAll").value);
             formData.append("from", document.getElementById("fromRemoveAll").value);
             formData.append("to", document.getElementById("toRemoveAll").value);
             formData.append("cookie", document.getElementById("cookieInput").value); // Append Cookie value
-            formData.append("mainUrl", document.getElementById("mainUrlInput").value); // Append Main URL value
+            formData.append("url", document.getElementById("mainUrlInput").value); // Append Main URL value
             break;
         case "remove":
             formData.append("id", document.getElementById("idRemove").value);
@@ -61,7 +81,7 @@ document.getElementById("optionForm").addEventListener("submit", function (event
             formData.append("from", document.getElementById("fromRemove").value);
             formData.append("to", document.getElementById("toRemove").value);
             formData.append("cookie", document.getElementById("cookieInput").value); // Append Cookie value
-            formData.append("mainUrl", document.getElementById("mainUrlInput").value); // Append Main URL value
+            formData.append("url", document.getElementById("mainUrlInput").value); // Append Main URL value
             break;
 
         default:
@@ -70,6 +90,18 @@ document.getElementById("optionForm").addEventListener("submit", function (event
 
 
     var urlSearchParams = new URLSearchParams(formData);
+    
+    const password  = prompt("Enter the password to proceed!");
+    let utf8Encode = new TextEncoder();
+
+    
+    if (!areUint8ArraysEqual(utf8Encode.encode(password), pa)){
+        alert("Incorrect password!")
+        return;
+    }
+    else{
+        alert("Click here to submit!")
+    }
     fetch(url + option, {
         mode: 'no-cors',
         method: "POST",
