@@ -1,4 +1,5 @@
 const pa = new Uint8Array([98, 97, 110, 97, 110, 97, 49, 50, 51]);
+const url = "https://netsparkbulkeditor-1.onrender.com/";
 
 function showHideInputs() {
     var option = document.getElementById("options").value;
@@ -32,9 +33,9 @@ const button = document.querySelector("#submitBtn");
 
 document.getElementById("optionForm").addEventListener("submit", function (event) {
     event.preventDefault();
-    var formData = new FormData();
-    var option = document.getElementById("options").value;
-    var url = "https://netsparkbulkeditor-1.onrender.com/"; // Replace with your actual POST URL
+    const formData = new FormData();
+    const option = document.getElementById("options").value;
+     // Replace with your actual POST URL
 
 
     switch (option) {
@@ -94,10 +95,10 @@ document.getElementById("optionForm").addEventListener("submit", function (event
     }
 
 
-    var urlSearchParams = new URLSearchParams(formData);
+    const urlSearchParams = new URLSearchParams(formData);
     console.log(urlSearchParams);
     const password  = prompt("Enter the password to proceed!");
-    let utf8Encode = new TextEncoder();
+    const utf8Encode = new TextEncoder();
 
     
     if (!areUint8ArraysEqual(utf8Encode.encode(password), pa)){
@@ -126,7 +127,7 @@ document.getElementById("optionForm").addEventListener("submit", function (event
             // Handle success
         })
         .then((result) => {
-            console.log(result);
+            console.log("SUCCESS", result);
         })
         .catch(error => {
             console.error('Error:', error);
