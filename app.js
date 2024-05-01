@@ -8,6 +8,7 @@ function showHideInputs() {
     document.getElementById("addInput").style.display = option === "add" ? "block" : "none";
     document.getElementById("removeAllInput").style.display = option === "removeAll" ? "block" : "none";
     document.getElementById("removeInput").style.display = option === "remove" ? "block" : "none";
+    document.getElementById("dailyTimeInput").style.display = option === "dailyTimeAll" ? "block" : "none";
 }
 function areUint8ArraysEqual(arr1, arr2) {
 
@@ -78,6 +79,15 @@ document.getElementById("optionForm").addEventListener("submit", function (event
             formData.append("cookie", document.getElementById("cookieInput").value); // Append Cookie value
             formData.append("url", document.getElementById("mainUrlInput").value); // Append Main URL value
             break;
+        case "dailyTimeAll":
+            console.log("das");
+            formData.append("hours", document.getElementById("hours").value);
+            formData.append("minutes", document.getElementById("minutes").value);
+            formData.append("week_hours", document.getElementById("weekHours").value);
+            formData.append("week_minutes", document.getElementById("weekMinutes").value);
+            formData.append("cookie", document.getElementById("cookieInput").value); // Append Cookie value
+            formData.append("url", document.getElementById("mainUrlInput").value); // Append Main URL value
+            break;    
 
         default:
             break;
@@ -85,7 +95,7 @@ document.getElementById("optionForm").addEventListener("submit", function (event
 
 
     var urlSearchParams = new URLSearchParams(formData);
-    
+    console.log(urlSearchParams);
     const password  = prompt("Enter the password to proceed!");
     let utf8Encode = new TextEncoder();
 
