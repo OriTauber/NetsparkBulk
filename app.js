@@ -10,19 +10,18 @@ function showHideInputs() {
     document.getElementById("removeInput").style.display = option === "remove" ? "block" : "none";
 }
 function areUint8ArraysEqual(arr1, arr2) {
-    // Check if lengths are different
+
     if (arr1.length !== arr2.length) {
         return false;
     }
 
-    // Iterate over each element and compare
     for (let i = 0; i < arr1.length; i++) {
         if (arr1[i] !== arr2[i]) {
             return false;
         }
     }
 
-    // If all elements are equal, return true
+
     return true;
 }
 window.onload = function () {
@@ -34,12 +33,8 @@ document.getElementById("optionForm").addEventListener("submit", function (event
     event.preventDefault();
     var formData = new FormData();
     var option = document.getElementById("options").value;
-    var url = "http://localhost:3000/"; // Replace with your actual POST URL
+    var url = "https://netsparkbulkeditor-1.onrender.com/"; // Replace with your actual POST URL
 
-    button.style.display = 'none';
-    setTimeout(() => {
-        button.style.display = 'block';
-    }, 2000);
 
     switch (option) {
         case "toggle":
@@ -102,6 +97,12 @@ document.getElementById("optionForm").addEventListener("submit", function (event
     else{
         alert("Click here to submit!")
     }
+
+    button.style.display = 'none';
+    setTimeout(() => {
+        button.style.display = 'block';
+    }, 2000);
+    
     fetch(url + option, {
         mode: 'no-cors',
         method: "POST",
